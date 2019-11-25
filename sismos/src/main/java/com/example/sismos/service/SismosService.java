@@ -34,10 +34,10 @@ public class SismosService {
 				.collect(Collectors.toList());
 	}
 	
-//	public List<Feature> getSismosByTwoDateRanges(String pais) {
-//		String url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson";
-//		Sismos sismos = restTemplate.getForObject(url, Sismos.class);
-//		return sismos.getFeatures().parallelStream().filter(f -> f.getProperties().getPlace().contains(", " + pais))
-//				.collect(Collectors.toList());
-//	}
+	public List<Feature> getSismosByTwoDateRanges(String pais) {
+		String url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson";
+		Sismos sismos = restTemplate.getForObject(url, Sismos.class);
+		return sismos.getFeatures().parallelStream().filter(f -> f.getProperties().getPlace().contains(", " + pais))
+				.collect(Collectors.toList());
+	}
 }
