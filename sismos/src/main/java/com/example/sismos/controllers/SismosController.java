@@ -65,4 +65,12 @@ public class SismosController {
 		return new ResponseEntity<>(sismosService.getSismosByPais(pais), HttpStatus.OK);
 	}
 
+	@RequestMapping(method = RequestMethod.GET, path = "/buscar/Dosfechas/{fechaInicioR1}/{fechaTerminoR1}/{fechaInicioR2}/{fechaTerminoR2}")
+	public ResponseEntity<?> getSismosByTwoDateRanges(@PathVariable(name = "fechaInicioR1") String fechaInicioR1,
+												  	  @PathVariable(name = "fechaTerminoR1") String fechaTerminoR1,
+												  	  @PathVariable(name = "fechaInicioR2") String fechaInicioR2,
+												  	  @PathVariable(name = "fechaTerminoR2") String fechaTerminoR2) {
+		return new ResponseEntity<Sismos>((Sismos) sismosService.getSismosByTwoDateRanges(fechaInicioR1, fechaTerminoR1,fechaInicioR2,fechaTerminoR2),
+				HttpStatus.OK);
+	}
 }

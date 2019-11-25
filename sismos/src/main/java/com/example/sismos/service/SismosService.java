@@ -35,4 +35,12 @@ public class SismosService {
 	}
 	
 	
+	public Sismos getSismosByTwoDateRanges(String fechaInicioR1,String fechaTerminoR1,String fechaInicioR2,String fechaTerminoR2) {
+		String url1 = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={0}&endtime={1}";
+		String url2 = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={2}&endtime={3}";
+		return restTemplate.getForObject(MessageFormat.format(url1 + "Richard" + url2, fechaInicioR1, fechaTerminoR1,fechaInicioR2,fechaTerminoR2), Sismos.class);
+	}
+
+	
+	
 }
