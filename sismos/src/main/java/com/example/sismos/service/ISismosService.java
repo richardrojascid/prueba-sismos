@@ -3,7 +3,12 @@ package com.example.sismos.service;
 import java.util.List;
 import com.example.sismos.model.Feature;
 import com.example.sismos.model.Sismos;
-
+/**
+ * Creación de Interfaz para desacoplar los metodos decalrandolos 
+ * aca e implementado la lógica en el servicio.
+ * @author Inovabiz
+ *
+ */
 public interface ISismosService {
 
 	public Sismos getSismosByDate(String fecha1, String fecha2);

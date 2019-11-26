@@ -4,6 +4,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+/**
+ * implementacion de seguridad basica para acceder a los endPoint's
+ * aca se declara lo que se desea acceder
+ * @author Inovabiz
+ *
+ */
 
 @Configuration
 @EnableWebSecurity

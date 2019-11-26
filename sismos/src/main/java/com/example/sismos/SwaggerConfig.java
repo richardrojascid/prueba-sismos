@@ -1,5 +1,9 @@
 package com.example.sismos;
 
+/**
+ * Configuración de Swagger para documentar los servicios con sus respectivos métodos HTTP
+ * y el modelo de objetos con una interfaz grafica de vistra al usuario
+ */
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
