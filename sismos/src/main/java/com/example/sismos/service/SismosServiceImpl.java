@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.sismos.constans.Constants;
 import com.example.sismos.model.Feature;
 import com.example.sismos.model.Sismos;
 
 @Service
-public class SismosService {
+public class SismosServiceImpl implements Constants {
 	@Autowired
 	private RestTemplate restTemplate;
 	
@@ -54,21 +55,29 @@ public class SismosService {
 		return restTemplate.getForObject(MessageFormat.format(url1 + " / " + url2, fechaInicioR1, fechaTerminoR1,fechaInicioR2,fechaTerminoR2), Sismos.class);
 	}
 	
+	
+	
 	/**
 	 * Se deben obtener los sismos ocurridos entre el 1 y 3 de Octubre más los ocurridos entre el 6 y 14 de Octubre. 
 	 * @param minMagnitudeR1
 	 * @param maxMagnitudeR1
 	 * @param minMagnitudeR2
 	 * @param maxMagnitudeR2
-	 * @return
+	 * @return los sismos que se encuentran entre estas dos rangos de fechas
 	 */
-	public Sismos getSismosByFourMagnitudes(String minMagnitudeR1, String maxMagnitudeR1,String minMagnitudeR2, String maxMagnitudeR2 ) {
-		String url1 = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude={0}&maxmagnitude={1}";
-		String url2 = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude={2}&maxmagnitude={3}";
-		return restTemplate.getForObject(MessageFormat.format(url1 + " / " + url2, minMagnitudeR1, maxMagnitudeR1,minMagnitudeR2,maxMagnitudeR2), Sismos.class);
+	
+	
+	public Sismos getSismosByHoldDatesRanges(){
+		String url1 = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={0}&endtime={1}";
+		String url2 = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={2}&endtime={3}";
+		return restTemplate.getForObject(MessageFormat.format(url1 + " / " + url2, INICIO_FECHA_1, TERMINO_FECHA_1,INICIO_FECHA_2,TERMINO_FECHA_2), Sismos.class);
 	}
 		
-	/*
+	
+	
+	
+	
+	/**
 	 * Exponer un endpoint para recibir un país como parámetro, el cual se debe comunicar con un servicio que filtra todos los sismos y los retorna.
 	 * @param pais
 	 * @return sismos por pais
@@ -100,5 +109,6 @@ public class SismosService {
 		return sismoTotal.size();
 					
 	}
+	
 	
 }

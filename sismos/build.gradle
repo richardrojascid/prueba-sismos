@@ -1,4 +1,5 @@
 plugins {
+	apply plugin: 'groovy'
 	id 'org.springframework.boot' version '2.2.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
@@ -16,6 +17,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jersey'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testCompile 'org.codehaus.groovy:groovy-all:2.4.8'
+	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-3'
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

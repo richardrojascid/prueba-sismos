@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.sismos.model.Sismos;
-import com.example.sismos.service.SismosService;
+import com.example.sismos.service.SismosServiceImpl;
 
 @RestController
 @RequestMapping("sismos")
@@ -24,7 +24,7 @@ public class SismosController {
 	 */
 		 
 	@Autowired
-	private SismosService sismosService;
+	private SismosServiceImpl sismosService;
 	
 	
 	/**
@@ -79,21 +79,15 @@ public class SismosController {
 		return new ResponseEntity<Sismos>((Sismos) sismosService.getSismosByTwoDateRanges(fechaInicioR1, fechaTerminoR1,fechaInicioR2,fechaTerminoR2),
 				HttpStatus.OK);
 	}
+		
 	/**
-	 * resultado por magnitudes
-	 * @param minMagnitudR1
-	 * @param maxMagnitudR1
-	 * @param minMagnitudR2
-	 * @param maxMagnitudR2
-	 * @return
+	 * {INICIO_FECHA_1}/{TERMINO_FECHA_1}/{INICIO_FECHA_2}/{TERMINO_FECHA_2}
+	 * @param sismo
+	 * @return 
 	 */
-	@RequestMapping(method = RequestMethod.GET, path = "/buscar/magnitudes/{minMagnitudR1}/{maxMagnitudR1}/{minMagnitudR2}/{maxMagnitudR2}")
-	public ResponseEntity<?> getSismosByFourMagnitudes(@PathVariable(name = "minMagnitudR1") String minMagnitudR1,
-													   @PathVariable(name = "maxMagnitudR1") String maxMagnitudR1,
-													   @PathVariable(name = "minMagnitudR2") String minMagnitudR2,
-													   @PathVariable(name = "maxMagnitudR2") String maxMagnitudR2) {
-		return new ResponseEntity<Sismos>(sismosService.getSismosByFourMagnitudes(minMagnitudR1, maxMagnitudR1,minMagnitudR2, maxMagnitudR2),
-				HttpStatus.OK);
+	@RequestMapping(method = RequestMethod.POST, path = "/buscar/sismosPorRangoDeMesFijo")
+	public ResponseEntity<?> getSismosByHoldDatesRanges(@RequestBody Sismos sismo)  {
+		return new ResponseEntity<Sismos>(sismosService.getSismosByHoldDatesRanges(), HttpStatus.OK);
 	}
 	/**
 	 * End point que publica el conteo de sismos por dos paises en dos fechas
@@ -111,6 +105,7 @@ public class SismosController {
 												@PathVariable(name = "fecha2") String fecha2) {
 		return new ResponseEntity<>(sismosService.getSismosByTwoDatesAndTwoCountries(pais1,pais2,fecha1,fecha2), HttpStatus.OK);
 	}
+	
 	
 
 }
