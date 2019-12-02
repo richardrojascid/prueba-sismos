@@ -1,5 +1,4 @@
 package com.example.sismos;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,7 +18,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
             web.ignoring()
             // Ignorar seguridad por ahora
-                .antMatchers("/sismos/**",
+                .antMatchers(
+                "/index/**",
                 "/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources/**",
