@@ -20,7 +20,7 @@ import com.example.demo.usuarios.models.entity.Usuario;
 
 @Service
 public class UsuarioService implements IUsuarioService, UserDetailsService {
-
+	
 	private Logger log = LoggerFactory.getLogger(UsuarioService.class);
 	
 	@Autowired
@@ -40,6 +40,9 @@ public class UsuarioService implements IUsuarioService, UserDetailsService {
 				.map(role -> new SimpleGrantedAuthority(role.getNombre()))
 				.peek(authority -> log.info("Role: " + authority.getAuthority()))
 				.collect(Collectors.toList());
+		
+		log.info("Usuario Autenticado: " + username);
+		
 		return new User(usuario.getUsername(), usuario.getPassword(),usuario.getEnabled(), true, true, true, authorities);
 	}
 
