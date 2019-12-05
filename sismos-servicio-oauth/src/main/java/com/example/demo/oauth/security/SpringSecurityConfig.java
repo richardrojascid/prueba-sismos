@@ -6,14 +6,25 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 public class SpringSecurityConfig extends	WebSecurityConfigurerAdapter{
 
-	@Autowired
-	private UserDetailsService usuarioService;
+	@SuppressWarnings("deprecation")
+	@Bean
+	private UserDetailsService userdetailService() { //usuarioService;
+		return new InMemoryUserDetailsManager(
+				User.withDefaultPasswordEncoder()
+				.username("usuario final")
+				.password ("contraseña")
+				.roles("USUARIO")
+				.build());
+	
+	}
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -23,7 +34,7 @@ public class SpringSecurityConfig extends	WebSecurityConfigurerAdapter{
 	@Override
 	@Autowired
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(this.usuarioService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(this.userDetailsService()).passwordEncoder(passwordEncoder());
 		
 	}
 
