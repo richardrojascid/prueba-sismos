@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.sismos.model.Sismos;
 import com.example.sismos.service.SismosServiceImpl;
 
-@RefreshScope
+
 @RestController
 @RequestMapping("sismos")
 public class SismosController {
